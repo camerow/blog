@@ -1,0 +1,21 @@
+{{> header }}
+<div class="row">
+  <div class="twelve columns">
+    <div class="text-center">
+      <h1>{{ title }}</h1>
+      {{{ contents }}}
+    </div>
+
+    <div class="row">
+      {{#each collections.posts}}
+      <div>
+        <h3>{{formatDate this.date}}</h3>
+        <a href="{{this.path}}">{{this.title}}</a>
+        {{this.preview}}
+        {{url}}
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+{{> footer }}

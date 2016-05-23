@@ -1,0 +1,14 @@
+{{> header }}
+  <h1>{{ title }}</h1>
+  <article class="post-container">
+    {{{ contents }}}
+  </article>
+
+  {{#if previous}}
+    <a href="/{{previous.path}}">< Previous</a>
+  {{/if}}
+  {{#if next}}
+    <a href="/{{next.path}}">Next ></a>
+  {{/if}}
+
+{{> footer }}
