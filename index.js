@@ -10,6 +10,7 @@ var Metalsmith  = require('metalsmith'),
     findLayout  = require('./libs/plugins/findLayout.js'),
     logMetadata = require('./libs/plugins/logMetadata.js'),
     /* Other imports */
+    path        = require('path'),
     fs          = require('fs'),
     moment      = require('moment'),
     handlebars  = require('handlebars');
@@ -29,34 +30,52 @@ handlebars.registerHelper('formatDate', function(context, block) {
 handlebars.registerPartial('header', fs.readFileSync(__dirname + '/templates/partials/header.hbs').toString());
 handlebars.registerPartial('footer', fs.readFileSync(__dirname + '/templates/partials/footer.hbs').toString());
 
+// function before() {
+//   return function(files, metal, done) {
+//     console.log("----- Metalsmith Before -----\n", Object.keys(files).filter((file) => { return /post/.test(file)  }));
+//     done();
+//   }
+// }
+//
+// function after() {
+//   return function(files, metal, done) {
+//     console.log("----- Metalsmith After -----\n", Object.keys(files).filter((file) => { return /post/.test(file) }));
+//     done();
+//   }
+// }
+
 Metalsmith(__dirname)
   .clean(true)
   .metadata({
     site: {
-      url: "localhost:3000"
+      title: "Will Cameron | Blog",
+      baseUrl: "localhost:3000"
     }
   })
   .use(sass())
-  .use(autoprefixer())
+  // .use(autoprefixer())
   .use(markdown())
   .use(findLayout({
     pattern: 'posts',
     layout: 'post.hbs'
   }))
+  // .use(before())
   .use(permalinks({
     pattern: ':collection/:title'
   }))
+  // .use(after())
   .use(collections({
     posts: {
       sortBy: 'date',
       reverse: true
-    }
+    },
+    about: "about.md"
   }))
   .use(layouts({
     engine: 'handlebars',
     directory: 'templates',
     pattern: '**/*.html',
-    default: 'page.hbs',
+    // default: 'page.hbs',
     partials: 'templates/partials/'
   }))
   .destination('./build')

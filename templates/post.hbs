@@ -1,14 +1,33 @@
 {{> header }}
-  <h1>{{ title }}</h1>
-  <article class="post-container">
-    {{{ contents }}}
-  </article>
 
-  {{#if previous}}
-    <a href="/{{previous.path}}">< Previous</a>
-  {{/if}}
-  {{#if next}}
-    <a href="/{{next.path}}">Next ></a>
+
+
+<div class="post">
+  {{#if page.image}}
+
+    <div class="featuredImage">
+        <img src="/assets/img/ {{site.url}}/ {{page.image}} }}" alt="" />
+      </div>
+
   {{/if}}
 
+  <h1 class="postTitle">{{ title }}</h1>
+  <p class="meta">{{formatDate date }} | <span class="time">{{ wordcount }}</span> Minute Read</p>
+
+  {{{ contents }}}
+
+  <!-- POST NAVIGATION -->
+  <div class="postNav clearfix">
+    {{#if previous}}
+      <a class="prev{{#if previous.image}} image{{/if}}" href="/{{ previous.path }}"><span>&laquo;&nbsp;{{ previous.title }}</span>
+
+    </a>
+    {{/if}}
+    {{#if next}}
+      <a class="next{{#if next.image}} image{{/if}}" href="/{{ next.path }}"><span>{{ next.title }}&nbsp;&raquo;</span>
+
+      </a>
+    {{/if}}
+  </div>
+</div>
 {{> footer }}

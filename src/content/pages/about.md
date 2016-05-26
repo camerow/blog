@@ -1,6 +1,6 @@
 ---
 title: About
-template: page.hbs
+template: about.hbs
 ---
 
 Something about me.
