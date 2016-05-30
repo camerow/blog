@@ -1,6 +1,6 @@
 ---
-title: "Second Post"
+title: Talking about Hapi
 date: 2016-05-21
 collection: posts
 ---
-#### My second post
+#### Post about Hapi.js

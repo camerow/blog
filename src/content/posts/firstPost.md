@@ -1,9 +1,7 @@
 ---
-title: "First Post"
+title: RxJS
 date: 2016-05-20
-preview: This is something about the post...
+preview: I really like observables, here's why...
 collection: posts
 ---
-#### Whoohoo
-
-My first post. Hello world.
+#### Observe

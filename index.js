@@ -45,6 +45,10 @@ Metalsmith(__dirname)
     pattern: 'posts',
     layout: 'post.hbs'
   }))
+  .use(findLayout({
+    pattern: 'about',
+    layout: 'about.hbs'
+  }))
   .use(permalinks({
     pattern: ':collection/:title'
   }))
@@ -52,8 +56,7 @@ Metalsmith(__dirname)
     posts: {
       sortBy: 'date',
       reverse: true
-    },
-    pages: '**/*.md'
+    }
   }))
   .use(layouts({
     engine: 'handlebars',

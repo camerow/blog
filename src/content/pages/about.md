@@ -1,6 +1,5 @@
 ---
 title: "About"
-template: about.hbs
 collection: pages
 ---
 
