@@ -3,30 +3,38 @@
   <head>
     <meta charset="utf-8">
     <title>{{site.title}}</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="Will Cameron | Blog" >
     <meta property="og:url" content="{{baseUrl}}">
+
+    <link href='https://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300|Open+Sans' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/assets/css/normalize.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="/assets/css/skeleton.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="/assets/css/custom.css" media="screen" title="no title" charset="utf-8">
   </head>
 
   <body>
-
     <div class="row">
-      <div class="header">
+      <header>
         <div class="container">
 
-          <div class="one-half column">{{site.title}}</div>
           <div class="one-half column">
-            <div class="u-pull-right">
-              <a class="fancy" href="/pages/about">about</a>
-              <a class="fancy" href="">posts</a>
+            <h2>
+              <a class="header-title" href="/">{{site.title}}</a>
+            </h2>
+          </div>
+          <div class="one-half column">
+            <div class="mg-t-15 mg-b-15 u-pull-right">
+              {{#each collections.pages}}
+                <a class="header-link" href="/{{this.path}}">{{this.title}}</a>
+              {{/each}}
+              <a class="header-link" href="/">posts</a>
             </div>
           </div>
 
         </div>
-      </div>
+      </header>
     </div>
     <!-- start page container -->
-    <div class="container">
+    <div class="container body">

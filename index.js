@@ -20,7 +20,7 @@ handlebars.registerHelper('formatDate', function(context, block) {
   if (moment || window.moment) {
     var f = "M ddd, YYYY";
     var result = moment(context).format(f);
-    console.log("date: ", result);
+    // console.log("date: ", result);
     return result;
   }
 
@@ -69,7 +69,8 @@ Metalsmith(__dirname)
     if (err) console.log("ERR", err);
     for (var file in files) {
       if (/about/.test(file)) {
-        console.log(files[file]);
+        // console.log(files[file]);
       }
     }
+    console.log("Build at: ", new Date());
   })

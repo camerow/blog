@@ -1,6 +1,6 @@
 ---
-title: "About"
+title: about
 collection: pages
 ---
 
-# Something about me.
+## Hi.
