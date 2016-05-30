@@ -1,6 +1,7 @@
 ---
-title: About
+title: "About"
 template: about.hbs
+collection: pages
 ---
 
-Something about me.
+# Something about me.

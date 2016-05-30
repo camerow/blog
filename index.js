@@ -27,28 +27,14 @@ handlebars.registerHelper('formatDate', function(context, block) {
   return context;
 });
 
-handlebars.registerPartial('header', fs.readFileSync(__dirname + '/templates/partials/header.hbs').toString());
-handlebars.registerPartial('footer', fs.readFileSync(__dirname + '/templates/partials/footer.hbs').toString());
-
-// function before() {
-//   return function(files, metal, done) {
-//     console.log("----- Metalsmith Before -----\n", Object.keys(files).filter((file) => { return /post/.test(file)  }));
-//     done();
-//   }
-// }
-//
-// function after() {
-//   return function(files, metal, done) {
-//     console.log("----- Metalsmith After -----\n", Object.keys(files).filter((file) => { return /post/.test(file) }));
-//     done();
-//   }
-// }
+handlebars.registerPartial('header', fs.readFileSync(__dirname + '/layouts/partials/header.hbs').toString());
+handlebars.registerPartial('footer', fs.readFileSync(__dirname + '/layouts/partials/footer.hbs').toString());
 
 Metalsmith(__dirname)
   .clean(true)
   .metadata({
     site: {
-      title: "Will Cameron | Blog",
+      title: "Will Cameron",
       baseUrl: "localhost:3000"
     }
   })
@@ -59,26 +45,28 @@ Metalsmith(__dirname)
     pattern: 'posts',
     layout: 'post.hbs'
   }))
-  // .use(before())
   .use(permalinks({
     pattern: ':collection/:title'
   }))
-  // .use(after())
   .use(collections({
     posts: {
       sortBy: 'date',
       reverse: true
     },
-    about: "about.md"
+    pages: '**/*.md'
   }))
   .use(layouts({
     engine: 'handlebars',
-    directory: 'templates',
     pattern: '**/*.html',
-    // default: 'page.hbs',
-    partials: 'templates/partials/'
+    partials: 'layouts/partials/',
+    rename: true
   }))
   .destination('./build')
   .build(function(err, files) {
     if (err) console.log("ERR", err);
+    for (var file in files) {
+      if (/about/.test(file)) {
+        console.log(files[file]);
+      }
+    }
   })

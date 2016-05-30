@@ -1,8 +1,5 @@
 ---
-title: Home
+title: Posts
 layout: home.hbs
 permalink: false
 ---
-Hi, this is my start page.
-
-Some info!

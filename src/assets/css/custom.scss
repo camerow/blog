@@ -2,7 +2,20 @@ body {
   // background-color: #dcd9cd !important;
   color: #3b444b !important;
 }
-// /* Helper classes */
-// .text-center {
-//   text-align: center;
-// }
+
+a {
+  text-decoration: none;
+  &.fancy {
+    color: #6C61FF;
+  }
+  &:hover {
+    // color: #58C0E8;
+    // background-color: #fff;
+    text-decoration: underline;
+  }
+}
+
+.header {
+  height: 50px;
+  background-color: #58C0E8;
+}
