@@ -1,7 +1,5 @@
 {{> header }}
 
-
-
 <div class="post">
   {{#if page.image}}
 
@@ -13,8 +11,9 @@
 
   <h1 class="postTitle">{{ title }}</h1>
   <p class="meta">{{formatDate date }}</p>
-
-  {{{ contents }}}
+  <div class="container">    
+    {{{ contents }}}
+  </div>
 
   <!-- POST NAVIGATION -->
   <div class="postNav clearfix">

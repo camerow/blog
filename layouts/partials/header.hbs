@@ -15,26 +15,34 @@
   </head>
 
   <body>
-    <div class="row">
-      <header>
-        <div class="container">
+    <nav>
+      <div class="flex-row vertical-fill">
+        <div class="container flex">
 
-          <div class="one-half column">
-            <h2>
-              <a class="header-title" href="/">{{site.title}}</a>
-            </h2>
-          </div>
-          <div class="one-half column">
-            <div class="mg-t-15 mg-b-15 u-pull-right">
+          <div class="flex-row flex-fluid middle equalHMWrap">
+            <div class="flex justify-end">
+              <h2>
+                <a class="header-title" href="/">{{site.title}}</a>
+              </h2>
+            </div>
+
+            <div class="flex justify-end flex-fluid">
+              <!-- Pages are one-offs that go in nav, may
+              want to make this a dropdown if it gets too long -->
               {{#each collections.pages}}
+              <h4 class="nav-item">
                 <a class="header-link" href="/{{this.path}}">{{this.title}}</a>
+              </h4>
               {{/each}}
-              <a class="header-link" href="/">posts</a>
+              <h4 class="nav-item">
+                <a class="header-link" href="/">posts</a>
+              </h4>
             </div>
           </div>
 
+
         </div>
-      </header>
     </div>
+  </nav>
     <!-- start page container -->
     <div class="container body">

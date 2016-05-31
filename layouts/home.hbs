@@ -1,15 +1,17 @@
 {{> header }}
-<div class="row">
+<div class="row posts-body">
   <div class="twelve columns">
     <div class="text-center">
-      <h1>{{ title }}</h1>
+      <h1 class="main-title">{{ title }}</h1>
     </div>
 
-    <div class="row">
+    <div class="row posts-list">
       {{#each collections.posts}}
-      <div>
+      <div class="post-item">
         <div>{{ formatDate this.date }}</div>
-        <a href="/{{this.path}}">{{ this.title }}</a>
+        <h3>
+          <a class="post-title" href="/{{this.path}}">{{ this.title }}</a>
+        </h3>
         <!-- {{ this.preview }} -->
         {{url}}
       </div>
