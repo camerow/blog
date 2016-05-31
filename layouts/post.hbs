@@ -1,32 +1,39 @@
 {{> header }}
 
-<div class="post">
-  {{#if page.image}}
+<div class="post flex post-body">
+  <div class="flex-row flex-fluid">    
+    <div class="flex-col flex-fluid">
+      {{#if page.image}}
 
-    <div class="featuredImage">
-        <img src="/assets/img/ {{site.url}}/ {{page.image}} }}" alt="" />
+      <div class="featuredImage">
+        <img src="/assets/img/{{page.image}}" alt="" />
       </div>
 
-  {{/if}}
+      {{/if}}
 
-  <h1 class="postTitle">{{ title }}</h1>
-  <p class="meta">{{formatDate date }}</p>
-  <div class="container">    
-    {{{ contents }}}
+      <h1 class="postTitle">{{ title }}</h1>
+      <p class="meta">{{formatDate date }}</p>
+
+      <div class="container flex-col">
+        {{{ contents }}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POST NAVIGATION -->
+<div class="flex-row flex-fluid justify-center">
+  <div class="flex-col flex-fluid no-wrap">
+    {{#if previous}}
+      <a class="prev self-start" href="/{{ previous.path }}"><span>&laquo;&nbsp;{{ previous.title }}</span></a>
+    {{/if}}
   </div>
 
-  <!-- POST NAVIGATION -->
-  <div class="postNav clearfix">
-    {{#if previous}}
-      <a class="prev{{#if previous.image}} image{{/if}}" href="/{{ previous.path }}"><span>&laquo;&nbsp;{{ previous.title }}</span>
-
-    </a>
-    {{/if}}
+  <div class="flex-col flex-fluid no-wrap">
     {{#if next}}
-      <a class="next{{#if next.image}} image{{/if}}" href="/{{ next.path }}"><span>{{ next.title }}&nbsp;&raquo;</span>
-
-      </a>
+      <a class="next self-end" href="/{{ next.path }}"><span>{{ next.title }}&nbsp;&raquo;</span></a>
     {{/if}}
   </div>
 </div>
+
 {{> footer }}

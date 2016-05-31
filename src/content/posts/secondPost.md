@@ -9,3 +9,14 @@ collection: posts
 #### Post about Hapi.js
 
 This is some normal text.
+
+~~~~ this is a code block ~~~~
+
+```javascript
+
+function test(a) {
+  // comment
+
+  return a;
+}
+```
