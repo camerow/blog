@@ -1,3 +1,6 @@
+@import "layout";
+@import "fonts";
+
 $primary: #58C0E8;
 $secondary: #E8A13F;
 $footerHeight: 90px;
@@ -9,41 +12,14 @@ html, body {
 }
 body {
   font-size: 1.8em;
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
   color: $fontColor !important;
 }
 h1, h2, h3, h4, h5 {
   margin: 0;
 }
-h1, h2 {
-  font-family: 'Oswald', sans-serif !important;
-  a {
-    font-family: 'Oswald', sans-serif !important;
-  }
-}
-h3, h4, h5 {
-  font-family: 'Open Sans Condensed', sans-serif;
-}
 
-p {
-  font-family: 'Open Sans', sans-serif;
-}
-
-a {
-  font-family: 'Open Sans Condensed', sans-serif;
-  text-decoration: none;
-
-  &.header-link,
-  &.header-title,
-  &.footer-link {
-    text-decoration: none;
-    color: #fff;
-  }
-  &:hover {
-    text-decoration: underline;
-  }
-}
 nav {
   // display: flex;
   // flex-direction: row;
@@ -66,14 +42,11 @@ footer {
 .mg-t-15 {
   margin-top: 15px;
 }
-
-.body {
-  flex-direction: row;
-  flex: 1;
-  // overflow: auto;
+.post-title {
+  margin-top: 25px;
 }
-.post-body {
-  margin: 25px 0;
+.main-body {
+  min-height: calc(100vh - 160px);
 }
 .post-item {
   margin-bottom: 20px;
@@ -132,19 +105,17 @@ footer {
 .vertical-fill {
   height: 100%;
 }
-.next, .prev {
+.next {
   border: 1px solid #E1E1E1;
   border-radius: 10px;
+  margin: 20px 0px 20px 20px;
 }
-a {
-  &.prev, &.next {
-    padding: 10px;
-  }
-  &.prev:hover, &.next:hover {
-    background-color: #E1E1E1;
-    text-decoration: none;
-  }
-}
+.prev {
+   border: 1px solid #E1E1E1;
+   border-radius: 10px;
+   margin: 20px 20px 20px 0;
+ }
+
 .primary {
   color: $primary !important;
 }
@@ -161,4 +132,25 @@ a {
 
 .nav-item:not(:last-child) {
   margin-right: 14px;
+}
+body {
+    color: #777;
+}
+
+.pure-img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+pre {
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }

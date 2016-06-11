@@ -1,39 +1,40 @@
 {{> header }}
 
-<div class="post flex post-body">
-  <div class="flex-row flex-fluid">    
-    <div class="flex-col flex-fluid">
-      {{#if page.image}}
+<div class="pure-g">
+  <div class="pure-u-1">
+    <div class="post">
+        {{#if page.image}}
 
-      <div class="featuredImage">
-        <img src="/assets/img/{{page.image}}" alt="" />
+        <div class="featuredImage">
+          <img src="/assets/img/{{page.image}}" alt="" />
+        </div>
+
+        {{/if}}
+
+        <h1 class="post-title">{{ title }}</h1>
+        <p class="meta">{{formatDate date }}</p>
+
+        <div class=" flex-col">
+          {{{ contents }}}
+        </div>
       </div>
+      <!-- POST NAVIGATION -->
+      <div class="flex-row flex-fluid justify-center">
+        <div class="flex-col flex-fluid no-wrap">
+          {{#if previous}}
+          <a class="prev self-start" href="/{{ previous.path }}"><span>&laquo;&nbsp;{{ previous.title }}</span></a>
+          {{/if}}
+        </div>
 
-      {{/if}}
-
-      <h1 class="postTitle">{{ title }}</h1>
-      <p class="meta">{{formatDate date }}</p>
-
-      <div class="container flex-col">
-        {{{ contents }}}
+        <div class="flex-col flex-fluid no-wrap">
+          {{#if next}}
+          <a class="next self-end" href="/{{ next.path }}"><span>{{ next.title }}&nbsp;&raquo;</span></a>
+          {{/if}}
+        </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- POST NAVIGATION -->
-<div class="flex-row flex-fluid justify-center">
-  <div class="flex-col flex-fluid no-wrap">
-    {{#if previous}}
-      <a class="prev self-start" href="/{{ previous.path }}"><span>&laquo;&nbsp;{{ previous.title }}</span></a>
-    {{/if}}
-  </div>
-
-  <div class="flex-col flex-fluid no-wrap">
-    {{#if next}}
-      <a class="next self-end" href="/{{ next.path }}"><span>{{ next.title }}&nbsp;&raquo;</span></a>
-    {{/if}}
-  </div>
-</div>
 
 {{> footer }}

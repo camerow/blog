@@ -8,16 +8,21 @@
     <meta property="og:title" content="Will Cameron | Blog" >
     <meta property="og:url" content="{{baseUrl}}">
 
-    <link href='https://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300|Open+Sans' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/assets/css/normalize.css" media="screen" title="no title" charset="utf-8">
-    <link rel="stylesheet" href="/assets/css/skeleton.css" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
     <link rel="stylesheet" href="/assets/css/custom.css" media="screen" title="no title" charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300|Open+Sans' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
     <nav>
-      <div class="flex-row vertical-fill">
-        <div class="container flex">
+      <div class="content flex-row vertical-fill">
+        <div class="flex">
 
           <div class="flex-row flex-fluid middle equalHMWrap">
             <div class="flex justify-end">
@@ -43,6 +48,6 @@
 
         </div>
     </div>
-  </nav>
     <!-- start page container -->
-    <div class="container body">
+    <div id="page">
+      <div class="content">
