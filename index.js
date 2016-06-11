@@ -64,7 +64,7 @@ Metalsmith(__dirname)
     partials: 'layouts/partials/',
     rename: true
   }))
-  .destination('./build')
+  .destination('./www')
   .build(function(err, files) {
     if (err) console.log("ERR", err);
     for (var file in files) {
