@@ -3,4 +3,5 @@ title: about
 collection: pages
 ---
 
-## Hi.
+### Hi.
+[resume](//resume.willcameron.me)

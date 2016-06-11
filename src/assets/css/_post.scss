@@ -1,0 +1,34 @@
+.post-link {
+  color: $primary;
+  &:visited {
+    color: $primary;
+  }
+}
+.post a {
+  color: $primary;
+}
+.post-nav {
+  min-height: 50px;
+  min-width: 80px;
+  border-radius: 5px;
+  border: 1px solid $fontColor;
+}
+.post-date {
+  margin: 0;
+}
+.post-list-item {
+  margin-bottom: 20px;
+  p {
+    line-height: 1;
+  }
+}
+.next {
+  border: 1px solid #E1E1E1;
+  border-radius: 10px;
+  margin: 20px 0px 20px 20px;
+}
+.prev {
+   border: 1px solid #E1E1E1;
+   border-radius: 10px;
+   margin: 20px 20px 20px 0;
+ }

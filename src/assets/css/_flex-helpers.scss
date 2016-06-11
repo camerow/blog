@@ -1,0 +1,51 @@
+.flex {
+  display: flex;
+}
+.flex-fluid {
+  flex: 1;
+}
+.full {
+  flex: 1 0 100%;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center{
+  justify-content: center;
+}
+.around {
+  justify-content: space-around;
+}
+.between {
+  justify-content: space-between;
+}
+.middle {
+  align-items: center;
+}
+.end {
+  align-items: flex-end;
+}
+.self-end {
+  align-self: flex-end;
+}
+.self-start {
+  align-self: flex-start;
+}
+.wrap {
+  flex-wrap: wrap;
+}
+.no-wrap {
+  flex-wrap: nowrap;
+}
+
+.equalHMWrap {
+	justify-content: space-between;
+}

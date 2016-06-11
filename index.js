@@ -18,7 +18,7 @@ var Metalsmith  = require('metalsmith'),
 handlebars.registerHelper('formatDate', function(context, block) {
   // console.log("context", context);
   if (moment || window.moment) {
-    var f = "M ddd, YYYY";
+    var f = "MMMM ddd, YYYY";
     var result = moment(context).format(f);
     // console.log("date: ", result);
     return result;

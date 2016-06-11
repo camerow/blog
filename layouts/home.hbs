@@ -3,16 +3,16 @@
     <div class="pure-u-1">
 
       <div class="text-center">
-        <h1 class="main-title">{{ title }}</h1>
+        <h1 class="page-title">{{ title }}</h1>
       </div>
     </div>
 
     <div class="pure-g posts-list">
       {{#each collections.posts}}
-      <div class="pure-u-1">
-        <div>{{ formatDate this.date }}</div>
+      <div class="post-list-item pure-u-1">
+        <p class="post-date">{{ formatDate this.date }}</p>
         <h3>
-          <a class="post-title" href="/{{this.path}}">{{ this.title }}</a>
+          <a class="post-link" href="/{{this.path}}">{{ this.title }}</a>
         </h3>
         <!-- {{ this.preview }} -->
         {{url}}

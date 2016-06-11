@@ -4,12 +4,16 @@
   "description": "my personal blog",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch layouts --watch libs --watch src -e hbs,scss,css index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon --watch layouts --watch libs --watch src -e hbs,scss,css,md index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "node index.js"
   },
   "author": "Will Cameron",
   "license": "ISC",
   "dependencies": {
+    "hapi": "^13.4.1",
+    "inert": "^4.0.0",
     "metalsmith-spellcheck": "^0.2.2"
   },
   "devDependencies": {

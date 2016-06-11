@@ -11,10 +11,10 @@
 
         {{/if}}
 
-        <h1 class="post-title">{{ title }}</h1>
+        <h1 class="page-title">{{ title }}</h1>
         <p class="meta">{{formatDate date }}</p>
 
-        <div class=" flex-col">
+        <div class="">
           {{{ contents }}}
         </div>
       </div>
@@ -22,13 +22,13 @@
       <div class="flex-row flex-fluid justify-center">
         <div class="flex-col flex-fluid no-wrap">
           {{#if previous}}
-          <a class="prev self-start" href="/{{ previous.path }}"><span>&laquo;&nbsp;{{ previous.title }}</span></a>
+          <a class="post-link prev self-start" href="/{{ previous.path }}"><span>&laquo;&nbsp;{{ previous.title }}</span></a>
           {{/if}}
         </div>
 
         <div class="flex-col flex-fluid no-wrap">
           {{#if next}}
-          <a class="next self-end" href="/{{ next.path }}"><span>{{ next.title }}&nbsp;&raquo;</span></a>
+          <a class="post-link next self-end" href="/{{ next.path }}"><span>{{ next.title }}&nbsp;&raquo;</span></a>
           {{/if}}
         </div>
       </div>

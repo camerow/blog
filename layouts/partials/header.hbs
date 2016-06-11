@@ -7,47 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:title" content="Will Cameron | Blog" >
     <meta property="og:url" content="{{baseUrl}}">
-
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" media="screen" charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
     <![endif]-->
     <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <link rel="stylesheet" media="screen" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
     <!--<![endif]-->
     <link rel="stylesheet" href="/assets/css/custom.css" media="screen" title="no title" charset="utf-8">
     <link href='https://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300|Open+Sans' rel='stylesheet' type='text/css'>
   </head>
 
   <body>
-    <nav>
-      <div class="content flex-row vertical-fill">
-        <div class="flex">
+    <div class="header">
+      <div style="margin-bottom: 0 !important;" class="content vertical-fill flex-row">
+        <div class="flex-row flex-fluid middle between">
+          <h2><a class="header-title" href="/">{{site.title}}</a></h2>
+          <!-- Pages are one-offs that go in nav, may
+          want to make this a dropdown if it gets too long -->
+          <div class="">
+            {{#each collections.pages}}
+            <h4 class="nav-item">
+              <a class="header-link" href="/{{this.path}}">{{this.title}}</a>
+            </h4>
+            {{/each}}
+            <h4 class="nav-item">
+              <a class="header-link" href="/">posts</a>
+            </h4>
 
-          <div class="flex-row flex-fluid middle equalHMWrap">
-            <div class="flex justify-end">
-              <h2>
-                <a class="header-title" href="/">{{site.title}}</a>
-              </h2>
-            </div>
-
-            <div class="flex justify-end flex-fluid">
-              <!-- Pages are one-offs that go in nav, may
-              want to make this a dropdown if it gets too long -->
-              {{#each collections.pages}}
-              <h4 class="nav-item">
-                <a class="header-link" href="/{{this.path}}">{{this.title}}</a>
-              </h4>
-              {{/each}}
-              <h4 class="nav-item">
-                <a class="header-link" href="/">posts</a>
-              </h4>
-            </div>
           </div>
-
-
         </div>
+      </div>
     </div>
+
     <!-- start page container -->
     <div id="page">
-      <div class="content">
+      <div class="page-content">
