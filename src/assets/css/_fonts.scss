@@ -1,0 +1,76 @@
+
+body {
+  font-size: 100%;
+}
+
+body, caption, th, td, input, textarea, select, option, legend, fieldset, h1, h2, h3, h4, h5, h6 {
+  font-size-adjust: 0.5;
+}
+// Font Family
+h1, h2 {
+  font-family: 'Oswald', sans-serif !important;
+  a {
+    font-family: 'Oswald', sans-serif !important;
+  }
+}
+h3, h4, h5 {
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  font-family: 'Open Sans Condensed', sans-serif;
+  text-decoration: none;
+
+  &.header-link,
+  &.header-title,
+  &.footer-link {
+    text-decoration: none;
+    color: #fff;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
+a {
+  &.prev, &.next {
+    padding: 10px;
+  }
+  &.prev:hover, &.next:hover {
+    background-color: #E1E1E1;
+    text-decoration: none;
+  }
+}
+
+/* Typography
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+h1 { font-size: 3.5rem; line-height: 1.2;  letter-spacing: -.1rem;}
+h2 { font-size: 3.0rem; line-height: 1.25; letter-spacing: -.1rem; }
+h3 { font-size: 2.5rem; line-height: 1.3;  letter-spacing: -.1rem; }
+h4 { font-size: 2rem; line-height: 1.35; letter-spacing: -.08rem; }
+h5 { font-size: 1.5rem; line-height: 1.5;  letter-spacing: -.05rem; }
+h6 { font-size: 1rem; line-height: 1.6;  letter-spacing: 0; }
+p {
+  font-size: 1.1rem;
+  line-height: 2.3;
+}
+/* Larger than phablet */
+@media (min-width: 550px) {
+  h1 { font-size: 3.5rem; }
+  h2 { font-size: 3.0rem; }
+  h3 { font-size: 2.5rem; }
+  h4 { font-size: 2rem; }
+  h5 { font-size: 1.5rem; }
+  h6 { font-size: 1rem; }
+}
+
+p {
+  margin-top: 0; }
