@@ -12,6 +12,9 @@ http {
   include mime.types;
   server {
     listen <%= ENV["PORT"] %>;
+
+    port_in_redirect off;
+
     server_name  _;
     <% if ENV["ROOT"] %>
       root /app/www/<%= ENV["ROOT"] %>;
@@ -20,8 +23,4 @@ http {
     <% end %>
     index index.html;
   }
-}
-
-server {
-  port_in_redirect off;
 }
