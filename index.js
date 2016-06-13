@@ -34,8 +34,7 @@ Metalsmith(__dirname)
   .clean(true)
   .metadata({
     site: {
-      title: "Will Cameron",
-      baseUrl: "localhost:3000"
+      title: "Will Cameron"
     }
   })
   .use(sass())
