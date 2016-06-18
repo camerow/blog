@@ -4,7 +4,7 @@ date: 2016-06-17
 preview: Victory.js and how to do custom components
 collection: posts
 ---
-## [Victory.js] (https://github.com/FormidableLabs/victory)
+## [Victory.js](https://github.com/FormidableLabs/victory)
 
 ### Custom labels
 
