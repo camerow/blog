@@ -1,7 +1,7 @@
 ---
-title: RxJS
+title: RethinkDB
 date: 2016-05-20
-preview: I really like observables, here's why...
+preview: I learned some stuff about Rethink...
 collection: posts
 ---
 Having never experienced working with a database, I was excited and nervous to start building a small analytics API powered by [Hapi.js](http://hapijs.com/), [RethinkDB](https://www.rethinkdb.com/) and [React](https://facebook.github.io/react/).
