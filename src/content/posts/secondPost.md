@@ -4,7 +4,6 @@ date: 2016-06-17
 preview: Victory.js and how to do custom components
 collection: posts
 ---
-## [Victory.js](https://github.com/FormidableLabs/victory)
 
 ### Custom labels
 
@@ -52,3 +51,4 @@ style={{labels: {angle: 45...}}}
   x={(d) => new Date(d.x)}
 />
 ```
+[Check it out here.](https://github.com/FormidableLabs/victory)
