@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Will Cameron</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Will Cameron | Blog" >
+    <meta property="og:url" content="">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" media="screen" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="/assets/css/custom.css" media="screen" title="no title" charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300|Open+Sans' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="header">
+      <div style="margin-bottom: 0 !important; flex: 1 1 100%;" class="content vertical-fill flex-row">
+        <div class="flex-row flex-fluid middle between">
+          <h2><a class="header-title" href="/">Will Cameron</a></h2>
+          <!-- Pages are one-offs that go in nav, may
+          want to make this a dropdown if it gets too long -->
+          <div>
+            <h4 class="nav-item">
+              <a class="header-link" href="/pages/about">about</a>
+            </h4>
+            <h4 class="nav-item">
+              <a class="header-link" href="/">posts</a>
+            </h4>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- start page container -->
+    <div id="page">
+      <div class="page-content">
+
+<div class="pure-g">
+  <div class="pure-u-1">
+    <div class="post">
+
+        <h1 class="page-title">Victory.js</h1>
+        <p class="meta">June Thu, 2016</p>
+
+        <div class="">
+          <h2 id="-victory-js-https-github-com-formidablelabs-victory-">[Victory.js] (<a href="https://github.com/FormidableLabs/victory">https://github.com/FormidableLabs/victory</a>)</h2>
+<h3 id="custom-labels">Custom labels</h3>
+<p>You can create labels to your liking with custom label components:</p>
+<pre><code class="lang-js">&lt;VictoryStack colorScale=&quot;warm&quot; style={{parent: parentStyle}}&gt;
+  &lt;VictoryBar
+    labelComponent={&lt;CustomLabel offset={25}/&gt;}
+    data={[{x: &quot;a&quot;, y: 2, label: &quot;WOW&quot;}, {x: &quot;b&quot;, y: 3, label: &quot;COOL&quot;}]}
+  /&gt;
+  &lt;VictoryBar
+    data={[{x: &quot;c&quot;, y: 2}, {x: &quot;d&quot;, y: 3}]}
+  /&gt;
+&lt;/VictoryStack&gt;
+</code></pre>
+<pre><code class="lang-js">class CustomLabel extends React.Component {
+  static propTypes = {
+    ...VictoryLabel.propTypes,
+    offset: React.PropTypes.number
+  };
+
+  renderLabel() {
+    const {offset, x} = this.props;
+    return &lt;VictoryLabel {...this.props} x={x + offset}/&gt;
+  }
+
+  render() {
+    return this.renderLabel();
+  }
+}
+</code></pre>
+<p>If your labels overlap, you can angle them:</p>
+<pre><code>style={{labels: {angle: 45...}}}
+</code></pre><pre><code>&lt;VictoryLine
+  data={this.state.data}
+  x={(d) =&gt; new Date(d.x)}
+/&gt;
+</code></pre>
+        </div>
+      </div>
+      <!-- POST NAVIGATION -->
+      <div class="flex-row flex-fluid justify-center">
+        <div class="flex-col flex-fluid no-wrap">
+        </div>
+
+        <div class="flex-col flex-fluid no-wrap">
+          <a class="post-link next self-end" href="/posts/rethinkdb"><span>RethinkDB&nbsp;&raquo;</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+    <!-- End container -->
+    <div class="footer">
+      <div style="margin-bottom: 0 !important;" class="content vertical-fill flex-row">
+        <div class="flex-row flex-fluid middle between">
+            <h5>Built with <a target="_blank" class="footer-link" href="http://www.metalsmith.io/">Metalsmith</a></h5>
+          <!-- <a class="footer-link" href="/">home</a> -->
+          <a target="_blank" class="footer-link" href="http://github.com/camerow/blog">source</a>
+        </div>
+      </div>
+    </div >
+  </body>
+</html>

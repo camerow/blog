@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Will Cameron</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Will Cameron | Blog" >
+    <meta property="og:url" content="">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" media="screen" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="/assets/css/custom.css" media="screen" title="no title" charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300|Open+Sans' rel='stylesheet' type='text/css'>
+  </head>
+
+  <body>
+    <div class="header">
+      <div style="margin-bottom: 0 !important; flex: 1 1 100%;" class="content vertical-fill flex-row">
+        <div class="flex-row flex-fluid middle between">
+          <h2><a class="header-title" href="/">Will Cameron</a></h2>
+          <!-- Pages are one-offs that go in nav, may
+          want to make this a dropdown if it gets too long -->
+          <div>
+            <h4 class="nav-item">
+              <a class="header-link" href="/pages/about">about</a>
+            </h4>
+            <h4 class="nav-item">
+              <a class="header-link" href="/">posts</a>
+            </h4>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- start page container -->
+    <div id="page">
+      <div class="page-content">
+
+<div class="pure-g">
+  <div class="pure-u-1">
+    <div class="post">
+
+        <h1 class="page-title">RethinkDB</h1>
+        <p class="meta">May Thu, 2016</p>
+
+        <div class="">
+          <p>Having never experienced working with a database, I was excited and nervous to start building a small analytics API powered by <a href="http://hapijs.com/">Hapi.js</a>, <a href="https://www.rethinkdb.com/">RethinkDB</a> and <a href="https://facebook.github.io/react/">React</a>.</p>
+<p>As RethinkDB is quite new, and my experience quite limited I plan on posting some of my struggles and documenting what I learn here. Starting with ReQL and the commands I struggled with, while including my eventual solution in the hopes that I remember a bit better and maybe even help someone else out.</p>
+<h3 id="querying-the-db-you-re-not-exactly-writing-js">Querying the DB - You&#39;re not (exactly) writing JS</h3>
+<p>ReQL is mostly intuitive, however it took me a while to realize that all commands are executed on the server. So a command like the following,</p>
+<pre><code class="lang-js">r.table(&#39;users&#39;)
+  .get(userId)
+    .run(conn,
+      (err, cursor) =&gt; cursor.toArray(
+        (err, result) =&gt; result
+      )
+    )
+</code></pre>
+<p>can be expanded upon, chained and won&#39;t run until it hits the server. Which means the patterning of the queries you write isn&#39;t <em>exactly</em> the way you would write it in your language of choice.</p>
+<h3 id="a-few-sample-queries">A few sample Queries</h3>
+<h4 id="1-filtering-on-multiple-keys-">1. Filtering on multiple keys:</h4>
+<p>Say we&#39;ve got a table <code>metrics</code> and you want to filter by both document ID and action type. Here&#39;s our table:</p>
+<pre><code class="lang-js">{  id: &quot;1&quot;,  action: &quot;follow&quot;},
+{  id: &quot;2&quot;,  action: &quot;like&quot;,},
+{  id: &quot;1&quot;,  action: &quot;like&quot;},
+{  id: &quot;2&quot;,  action: &quot;like&quot;,}
+</code></pre>
+<p>And we will get the table:
+<code>r.table(&quot;metrics&quot;)</code>, chain a filter <code>.filter({ id: req.params.id })</code>
+We can simply chain another filter on that</p>
+<pre><code>.filter({ action: &quot;follow&quot; })
+</code></pre><p>, resulting in:</p>
+<pre><code>r.table(&quot;metrics&quot;).filter({ id: &quot;1&quot; }).filter({ action: &quot;follow&quot; })
+</code></pre><p>and returning</p>
+<pre><code>{  id: &quot;1&quot;,  action: &quot;follow&quot;}
+</code></pre><p>alternatively you can write</p>
+<pre><code>r.table(&quot;metrics&quot;).filter({ id: &quot;1&quot;, action: &quot;follow&quot; })
+</code></pre><p>but I think embracing the chaining capabilities of ReQL early on allows you to understand the paradigm they are using and will give you less of a headache later.</p>
+<h4 id="2-push-and-delete-array-items">2. Push and Delete Array Items</h4>
+<p>This one was tough for me, and I ended up getting some help on the Slack forum. Luckily folks there were very patient and helpful. Here&#39;s our user object in a <code>user</code> table:</p>
+<pre><code>{  id: &quot;aUser&quot;,  posts: [    &quot;post1&quot;,    &quot;post2&quot;,    &quot;post3&quot;  ]}
+</code></pre><p>and to delete
+<code>post2</code> we&#39;ll do this:</p>
+<pre><code>r.table(&quot;users&quot;).get(&quot;aUser&quot;).update((doc) =&gt; {   
+  return {
+    &quot;posts&quot;: doc(&quot;posts&quot;).filter((item) =&gt; item.ne(&quot;post2&quot;)) }})
+    .run(conn,
+      (err, result) =&gt; {    
+        if (err) { throw err };    
+        reply({
+          statusCode: 200,
+          message: &quot;post deleted&quot;,
+          data: result    
+        });
+    })
+</code></pre><p>The tough part here for me was that <code>.update()</code> receives &#39;doc&#39; and I wasn&#39;t sure what that looked like. And since these commands get serialized, logging this to the terminal was a bit cryptic. The way I think of it now is that when you use the <code>.get(item)</code> method you are then passed a reference to one specific document in the table. So the next chained function is working on that item. The second challenge of this  command was that when you run something like <code>delete()</code> you are returned a value, but the document is not actually updated. You are simply writing a query for an array with a deleted item. Therefore</p>
+<pre><code>&quot;posts&quot;: doc(&quot;posts&quot;).filter((item) =&gt; item.ne(&quot;post2&quot;))
+</code></pre><p>must be wrapped in the <code>.update()</code> method.</p>
+
+        </div>
+      </div>
+      <!-- POST NAVIGATION -->
+      <div class="flex-row flex-fluid justify-center">
+        <div class="flex-col flex-fluid no-wrap">
+          <a class="post-link prev self-start" href="/posts/victory-js"><span>&laquo;&nbsp;Victory.js</span></a>
+        </div>
+
+        <div class="flex-col flex-fluid no-wrap">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+    <!-- End container -->
+    <div class="footer">
+      <div style="margin-bottom: 0 !important;" class="content vertical-fill flex-row">
+        <div class="flex-row flex-fluid middle between">
+            <h5>Built with <a target="_blank" class="footer-link" href="http://www.metalsmith.io/">Metalsmith</a></h5>
+          <!-- <a class="footer-link" href="/">home</a> -->
+          <a target="_blank" class="footer-link" href="http://github.com/camerow/blog">source</a>
+        </div>
+      </div>
+    </div >
+  </body>
+</html>
