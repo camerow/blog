@@ -62,45 +62,58 @@
   <div class="pure-u-1">
     <div class="post">
 
-        <h1 class="page-title">Victory.js</h1>
-        <p class="meta">June Thu, 2016</p>
+        <h1 class="page-title">Styling Victory.js Axis Components</h1>
+        <p class="meta">June Mon, 2016</p>
 
         <div class="">
-          <h3 id="custom-labels">Custom labels</h3>
-<p>You can create labels to your liking with custom label components:</p>
-<pre><code class="lang-js">&lt;VictoryStack colorScale=&quot;warm&quot; style={{parent: parentStyle}}&gt;
-  &lt;VictoryBar
-    labelComponent={&lt;CustomLabel offset={25}/&gt;}
-    data={[{x: &quot;a&quot;, y: 2, label: &quot;WOW&quot;}, {x: &quot;b&quot;, y: 3, label: &quot;COOL&quot;}]}
-  /&gt;
-  &lt;VictoryBar
-    data={[{x: &quot;c&quot;, y: 2}, {x: &quot;d&quot;, y: 3}]}
-  /&gt;
-&lt;/VictoryStack&gt;
+          <h3 id="all-axis">All Axis</h3>
+<p>I had a bit of trouble creating nice, clean <code>&lt;VictoryAxis /&gt;</code> components at first. Victory is really good about sensible defaults, but they won&#39;t always cut it. For some of the data I was getting from my API, my values were only relevant if they were whole numbers. Luckily the makers of Victory.js have you covered in that situation, and many others. <code>style</code> props can use their own callbacks to custom style labels, stroke, ticks, grid and more. Here is how to style a <code>&lt;VictoryAxis /&gt;</code>&#39;s grid and ticks values.</p>
+<h4 id="mini-victoryaxis-cheatsheet">Mini VictoryAxis Cheatsheet</h4>
+<ol>
+<li>Styling ticks and grid lines using callbacks.</li>
+</ol>
+<pre><code class="lang-js">// The ticks and grid only render if the value is a whole number.
+&lt;VictoryAxis
+  dependentAxis
+  tickFormat={ y =&gt; {
+    if (y % 1) {
+      return &quot;&quot;;
+    }
+    return y;
+  }}
+  style={{
+    grid: {
+      stroke: tick =&gt; tick % 1 == 0 ? &quot;#ccc&quot; : &quot;none&quot;,
+      width: 1
+    },
+    ticks: {
+      stroke: tick =&gt; tick % 1 == 0 ? &quot;#ccc&quot; : &quot;none&quot;,
+      strokeWidth: &quot;1px&quot;
+    }
+  }} /&gt;
 </code></pre>
-<pre><code class="lang-js">class CustomLabel extends React.Component {
-  static propTypes = {
-    ...VictoryLabel.propTypes,
-    offset: React.PropTypes.number
-  };
-
-  renderLabel() {
-    const {offset, x} = this.props;
-    return &lt;VictoryLabel {...this.props} x={x + offset}/&gt;
-  }
-
-  render() {
-    return this.renderLabel();
-  }
-}
-</code></pre>
-<p>If your labels overlap, you can angle them:</p>
-<pre><code>style={{labels: {angle: 45...}}}
-</code></pre><pre><code>&lt;VictoryLine
-  data={this.state.data}
-  x={(d) =&gt; new Date(d.x)}
+<ol>
+<li>Hide the vertical line of an axis</li>
+</ol>
+<pre><code class="lang-js">&lt;VictoryAxis
+  style={{
+    axis: {
+      stroke: &quot;none&quot;
+    }
+  }}
 /&gt;
-</code></pre><p><a href="https://github.com/FormidableLabs/victory">Check it out here.</a></p>
+</code></pre>
+<ol>
+<li>Angle overlapping tick labels</li>
+</ol>
+<pre><code class="lang-js">&lt;VictoryAxis
+  style={{
+    tickLabels: {
+      angle: 45
+    }
+  }}
+/&gt;
+</code></pre>
 
         </div>
       </div>
@@ -110,7 +123,7 @@
         </div>
 
         <div class="flex-col flex-fluid no-wrap">
-          <a class="post-link next self-end" href="/posts/rethinkdb"><span>RethinkDB&nbsp;&raquo;</span></a>
+          <a class="post-link next self-end" href="/posts/intro-to-victory-js"><span>Intro to Victory.js&nbsp;&raquo;</span></a>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ var Metalsmith  = require('metalsmith'),
     layouts     = require('metalsmith-layouts'),
     autoprefixer = require('metalsmith-autoprefixer'),
     sass        = require('metalsmith-sass'),
+    drafts      = require('metalsmith-drafts'),
     /* My plugins */
     findLayout  = require('./libs/plugins/findLayout.js'),
     logMetadata = require('./libs/plugins/logMetadata.js'),
@@ -37,6 +38,7 @@ Metalsmith(__dirname)
       title: "Will Cameron"
     }
   })
+  .use(drafts())
   .use(sass())
   // .use(autoprefixer())
   .use(markdown())

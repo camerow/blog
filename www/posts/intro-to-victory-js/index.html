@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Will Cameron</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Will Cameron | Blog" >
+    <meta property="og:url" content="">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.min.css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/highlight.min.js"></script>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" media="screen" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    <link rel="stylesheet" href="/assets/css/custom.css" media="screen" title="no title" charset="utf-8">
+    <link href='https://fonts.googleapis.com/css?family=Oswald|Open+Sans+Condensed:300|Open+Sans' rel='stylesheet' type='text/css'>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <!-- Google Dude. -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79866727-1', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </head>
+
+  <body>
+    <div class="header">
+      <div style="margin-bottom: 0 !important; flex: 1 1 100%;" class="content vertical-fill flex-row">
+        <div class="flex-row flex-fluid middle between">
+          <h2><a class="header-title" href="/">Will Cameron</a></h2>
+          <!-- Pages are one-offs that go in nav, may
+          want to make this a dropdown if it gets too long -->
+          <div>
+            <h4 class="nav-item">
+              <a class="header-link" href="/pages/about">about</a>
+            </h4>
+            <h4 class="nav-item">
+              <a class="header-link" href="/">posts</a>
+            </h4>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- start page container -->
+    <div id="page">
+      <div class="page-content">
+
+<div class="pure-g">
+  <div class="pure-u-1">
+    <div class="post">
+
+        <h1 class="page-title">Intro to Victory.js</h1>
+        <p class="meta">June Thu, 2016</p>
+
+        <div class="">
+          <h3 id="what-is-victory-js-">What is Victory JS?</h3>
+<p><a href="https://github.com/FormidableLabs/victory">Victory JS</a> is a graphing library build on D3.js by <a href="http://formidable.com/">Formidable Labs</a>. It aims to be clean and composable, and I think it does an amazing job of giving sensible defaults and an intuitive API.</p>
+<h3 id="composable-components">Composable Components</h3>
+<p>Victory really embraces the composability of react components, and allows you to intuitively nest components in a way that, for me at least, just makes sense. If you want to throw in a bunch of labels, axis, and graph types, go for it! Here I&#39;ve made a chart with a simple line graph of dates and values. I can give the <code>&lt;VictoryAxis /&gt;</code> component a bunch of tickValues or I can use the data it&#39;s given and use a callback for each data point. In one of the apps I&#39;ve been building, I use this as an opportunity to format my dates using Moment.js.</p>
+<pre><code class="lang-js">const data = [
+  { x: 1, y: new Date(&quot;01-01-2016&quot;) },
+  { x: 2, y: new Date(&quot;02-01-2016&quot;) },
+  { x: 3, y: new Date(&quot;03-01-2016&quot;) },
+  { x: 4, y: new Date(&quot;04-01-2016&quot;) }  
+];
+
+&lt;VictoryChart              
+  height={200}
+  width={650}&gt;
+  &lt;VictoryAxis
+    tickValues={ (x) =&gt; x.getDate() }
+  /&gt;
+  &lt;VictoryAxis
+    dependentAxis
+    label={&quot;Values&quot;}
+  /&gt;
+  &lt;VictoryLine
+    data={data}
+  /&gt;
+&lt;/VictoryChart&gt;
+</code></pre>
+<p>What&#39;s cool here is that you can add more <code>&lt;VictoryAxis /&gt;</code>, <code>&lt;VictoryLine /&gt;</code> components for more freedom to structure. You can move your axes to change the shape of your graph (eg. L-Shaped vs T-shaped) using the <code>offsetY</code> and <code>offsetX</code> props:</p>
+<pre><code class="lang-js">...
+  &lt;VictoryAxis offsetY={200} /&gt;
+...
+</code></pre>
+<h4 id="creating-custom-victory-labels">Creating Custom Victory Labels</h4>
+<p>You can create custom label components and pass them in as props to your other victory components. They will be passed some props by the parent component, and you can also pass ownProps as well.</p>
+<pre><code class="lang-js">&lt;VictoryStack colorScale=&quot;warm&quot; style={{parent: parentStyle}}&gt;
+  &lt;VictoryBar
+    labelComponent={&lt;CustomLabel offset={25}/&gt;}
+    data={[{x: &quot;a&quot;, y: 2, label: &quot;WOW&quot;}, {x: &quot;b&quot;, y: 3, label: &quot;COOL&quot;}]}
+  /&gt;
+  &lt;VictoryBar
+    data={[{x: &quot;c&quot;, y: 2}, {x: &quot;d&quot;, y: 3}]}
+  /&gt;
+&lt;/VictoryStack&gt;
+</code></pre>
+<pre><code class="lang-js">class CustomLabel extends React.Component {
+  static propTypes = {
+    ...VictoryLabel.propTypes,
+    offset: React.PropTypes.number
+  };
+
+  renderLabel() {
+    const {offset, x} = this.props;
+    return &lt;VictoryLabel {...this.props} x={x + offset}/&gt;
+  }
+
+  render() {
+    return this.renderLabel();
+  }
+}
+</code></pre>
+<p>I opted to nest my <code>&lt;VictoryLabel /&gt;</code> components in an <code>&lt;svg&gt;</code> block and position them within the graph relative to an anchor-point. This way was a bit easier for me to reason about, especially as my labels were quite static in nature. Here&#39;s a quick example.</p>
+<pre><code class="lang-js">&lt;svg&gt;
+  &lt;VictoryLabel
+    x={30}
+    y={190}
+    verticalAnchor=&quot;end&quot;
+  &gt;
+    {&quot;My Label&quot;}
+  &lt;/VictoryLabel&gt;
+&lt;/svg&gt;
+</code></pre>
+<p>I will try to write more about Victory as I find gotchas, nuances and useful features.</p>
+<p>Check it out <a href="https://github.com/FormidableLabs/victory">here</a>.</p>
+
+        </div>
+      </div>
+      <!-- POST NAVIGATION -->
+      <div class="flex-row flex-fluid justify-center">
+        <div class="flex-col flex-fluid no-wrap">
+          <a class="post-link prev self-start" href="/posts/styling-victory-js-axis-components"><span>&laquo;&nbsp;Styling Victory.js Axis Components</span></a>
+        </div>
+
+        <div class="flex-col flex-fluid no-wrap">
+          <a class="post-link next self-end" href="/posts/rethinkdb"><span>RethinkDB&nbsp;&raquo;</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+    <!-- End container -->
+    <div class="footer">
+      <div style="margin-bottom: 0 !important;" class="content vertical-fill flex-row">
+        <div class="flex-row flex-fluid middle between">
+            <h5>Built with <a target="_blank" class="footer-link" href="http://www.metalsmith.io/">Metalsmith</a></h5>
+          <!-- <a class="footer-link" href="/">home</a> -->
+          <a target="_blank" class="footer-link" href="http://github.com/camerow/blog">source</a>
+        </div>
+      </div>
+    </div >
+  </body>
+</html>
